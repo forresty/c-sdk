@@ -166,7 +166,7 @@ static Qiniu_Error Qiniu_UptokenAuth_Auth(
         void *self, Qiniu_Header **header, const char *url, const char *addition, size_t addlen) {
     Qiniu_Error err;
 
-    *header = curl_slist_append(*header, self);
+    *header = curl_slist_append(*header, (char *)self);
 
     err.code = 200;
     err.message = "OK";

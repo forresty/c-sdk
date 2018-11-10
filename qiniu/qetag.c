@@ -125,7 +125,7 @@ Qiniu_Error Qiniu_Qetag_New(struct _Qiniu_Qetag_Context ** ctx, unsigned int con
         concurrency = BLOCK_ELEMENT_MAX_COUNT;
     } // if
 
-    newCtx = calloc(1, sizeof(*newCtx) + sizeof(newCtx->blkArray[0]) * (concurrency - 1));
+    newCtx = (Qiniu_Qetag_Context *)calloc(1, sizeof(*newCtx) + sizeof(newCtx->blkArray[0]) * (concurrency - 1));
     if (newCtx == NULL) {
         err.code = 9999;
         err.message = "not enough memory";
@@ -325,7 +325,7 @@ Qiniu_Error Qiniu_Qetag_DigestFile(const char * localFile, char ** digest)
     char * buf = NULL;
 
     // 1MB buffer
-    buf = malloc(readingBytes);
+    buf = (char *)malloc(readingBytes);
     if (!buf) {
         err.code = 9999;
         err.message = "no enough memory";

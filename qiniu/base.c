@@ -312,7 +312,7 @@ static void Qiniu_Buffer_expand(Qiniu_Buffer* self, size_t expandSize)
 	while (newSize < expandSize) {
 		newSize <<= 1;
 	}
-	self->buf = realloc(self->buf, newSize);
+	self->buf = (char *)realloc(self->buf, newSize);
 	self->curr = self->buf + oldSize;
 	self->bufEnd = self->buf + newSize;
 }
@@ -695,4 +695,3 @@ void Qiniu_Stderr_Warn(const char* fmt, ...)
 }
 
 /*============================================================================*/
-
