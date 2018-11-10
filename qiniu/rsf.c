@@ -57,10 +57,10 @@ Qiniu_Error Qiniu_RSF_ListFiles(Qiniu_Client *self, Qiniu_RSF_ListRet *ret, cons
         encodedDelimiter = "";
     }
 
-    size_t limitLen = snprintf(NULL, 0, "%d", limit) + 1;
+    size_t limitLen = Qiniu_snprintf(NULL, 0, "%d", limit) + 1;
     char *limitStr = (char *) malloc(sizeof(char) * limitLen);
     memset(limitStr, 0, limitLen);
-    snprintf(limitStr, limitLen, "%d", limit);
+    Qiniu_snprintf(limitStr, limitLen, "%d", limit);
 
     url = Qiniu_String_Concat(QINIU_RSF_HOST, "/list?", "bucket=", encodedBucket, "&prefix=", encodedPrefix,
                               "&delimiter=", encodedDelimiter, "&marker=", encodedMarker, "&limit=", limitStr, NULL);

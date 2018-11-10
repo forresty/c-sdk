@@ -798,9 +798,9 @@ Qiniu_Error Qiniu_RS_BatchDeleteAfterDays(Qiniu_Client *self, Qiniu_RS_BatchItem
         entryURI = Qiniu_String_Concat3(entry->bucket, ":", entry->key);
         entryURIEncoded = Qiniu_String_Encode(entryURI);
 
-        size_t daysLen = snprintf(NULL, 0, "%d", entry->days) + 1;
+        size_t daysLen = Qiniu_snprintf(NULL, 0, "%d", entry->days) + 1;
         daysStr = (char *) malloc(sizeof(char) * daysLen);
-        snprintf(daysStr, daysLen, "%d", entry->days);
+        Qiniu_snprintf(daysStr, daysLen, "%d", entry->days);
 
         bodyPart = Qiniu_String_Concat(entryURIEncoded, "/", daysStr, NULL);
         opBody = Qiniu_String_Concat2("op=/deleteAfterDays/", bodyPart);
