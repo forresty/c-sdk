@@ -9,7 +9,7 @@
 #ifndef QINIU_EMU_POSIX_H
 #define QINIU_EMU_POSIX_H
 
-#include <windows.h>
+#include <Windows.h>
 #include <sys/types.h>
 
 #include "macro.h"

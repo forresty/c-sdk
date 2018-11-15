@@ -3,7 +3,7 @@
  Name        : http.h
  Author      : Qiniu.com
  Copyright   : 2012(c) Shanghai Qiniu Information Technologies Co., Ltd.
- Description : 
+ Description :
  ============================================================================
  */
 
@@ -38,7 +38,7 @@ QINIU_DLLAPI extern void Qiniu_Servend_Cleanup();
 /* type Qiniu_Mutex */
 
 #if defined(_WIN32)
-#include <windows.h>
+#include <Windows.h>
 typedef CRITICAL_SECTION Qiniu_Mutex;
 #else
 #include <pthread.h>
@@ -159,4 +159,3 @@ QINIU_DLLAPI extern void Qiniu_Client_InitMacAuth(Qiniu_Client* self, size_t buf
 #endif
 
 #endif /* QINIU_HTTP_H */
-

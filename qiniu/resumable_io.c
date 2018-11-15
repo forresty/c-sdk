@@ -23,7 +23,7 @@
 
 #if defined(_WIN32)
 
-#include <windows.h>
+#include <Windows.h>
 
 typedef struct _Qiniu_Rio_MTWG_Data
 {
@@ -699,4 +699,3 @@ Qiniu_Error Qiniu_Rio_PutFile(
     Qiniu_File_Close(f);
     return err;
 }
-

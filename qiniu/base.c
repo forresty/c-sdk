@@ -26,7 +26,7 @@ void Qiniu_Free(void* addr)
 
 #if defined(_WIN32)
 
-#include <windows.h>
+#include <Windows.h>
 
 Qiniu_Count Qiniu_Count_Inc(Qiniu_Count* self)
 {
