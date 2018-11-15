@@ -339,6 +339,13 @@ CURL *Qiniu_Client_reset(Qiniu_Client *self) {
 static CURL *Qiniu_Client_initcall(Qiniu_Client *self, const char *url) {
     CURL *curl = Qiniu_Client_reset(self);
 
+    // https://curl.haxx.se/mail/lib-2016-08/0118.html
+
+    // The easiest way to make sure it always reads from an environment
+    // variable first regardless of how you build is to set it using
+    // CURLOPT_CAINFO the option you are already using, like this
+    curl_easy_setopt(curl, CURLOPT_CAINFO, getenv("CURL_CA_BUNDLE"));
+
     curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
@@ -477,4 +484,3 @@ Qiniu_Error Qiniu_Client_CallNoRet(Qiniu_Client *self, const char *url) {
     curl_slist_free_all(headers);
     return err;
 }
-
