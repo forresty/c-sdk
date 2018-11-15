@@ -9,6 +9,7 @@
 
 #include "io.h"
 #include "reader.h"
+#include "http.c"
 #include <curl/curl.h>
 
 /*============================================================================*/
@@ -59,7 +60,13 @@ static Qiniu_Error Qiniu_Io_call(
     struct curl_slist *headers = NULL;
     const char *upHost = NULL;
 
-    CURL *curl = Qiniu_Client_reset(self);
+    //// For using multi-region storage.
+    if (extra && (upHost = extra->upHost) == NULL) {
+        upHost = QINIU_UP_HOST;
+    } // if
+
+    CURL *curl = Qiniu_Client_initcall(self, upHost);
+    curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, NULL);
 
     // Bind the NIC for sending packets.
     if (self->boundNic != NULL) {
@@ -89,13 +96,6 @@ static Qiniu_Error Qiniu_Io_call(
 
     headers = curl_slist_append(NULL, "Expect:");
 
-    //// For using multi-region storage.
-    if (extra && (upHost = extra->upHost) == NULL) {
-        upHost = QINIU_UP_HOST;
-    } // if
-
-
-    curl_easy_setopt(curl, CURLOPT_URL, upHost);
     curl_easy_setopt(curl, CURLOPT_HTTPPOST, formpost);
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
